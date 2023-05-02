@@ -6,6 +6,7 @@ import java.util.List;
 public class StringCalculator {
 
 	private static final String DEFAULT_DELIMTER = ",";
+	private static final int MAXIMUM_NUMBER_COUNT = 10;
 
 	public int add(String numbers) throws Exception {
 		int sum = 0;
@@ -14,10 +15,14 @@ public class StringCalculator {
 		}
 
 		String[] numberArray = numbers.split(DEFAULT_DELIMTER);
+		if (numberArray != null && numberArray.length < MAXIMUM_NUMBER_COUNT) {
 
-		for (String number : numberArray) {
-			int num = Integer.parseInt(number);
-			sum += num;
+			for (String number : numberArray) {
+				int num = Integer.parseInt(number);
+				sum += num;
+			}
+		}else {
+			System.out.println("Amount of numbers exceeded the maximum limit!!!");
 		}
 
 		return sum;

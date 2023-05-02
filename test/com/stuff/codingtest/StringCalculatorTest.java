@@ -31,5 +31,11 @@ class StringCalculatorTest {
 	        int result = calculator.add("1,2,3,4,5");
 	        Assertions.assertEquals(15, result);
 	    }
+	    
+	    @Test
+	    public void testMaximumCountOfNumbersExceeded() throws Exception {
+	        int result = calculator.add("1,2,3,4,5,6,7,8,9,10,11,12,13");
+	        Assertions.assertEquals(0, result);
+	    }
 
 }
