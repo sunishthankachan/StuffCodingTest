@@ -55,5 +55,18 @@ class StringCalculatorTest {
 	        int result = calculator.add("1,2,\n\n,3");
 	        Assertions.assertEquals(0, result);
 	    }
+	    
+	    @Test
+	    public void testCustomDelimter() throws Exception {
+	        int result = calculator.add("//;\n1;2");
+	        Assertions.assertEquals(3, result);
+	    }
+	    
+	    @Test
+	    public void testNegativeNumbers() {
+	        Assertions.assertThrows(Exception.class, () -> {
+	            calculator.add("-1,2,-3");
+	        });
+	    }
 
 }
