@@ -6,22 +6,30 @@ import java.util.List;
 public class StringCalculator {
 
 	private static final String DEFAULT_DELIMTER = ",";
+	private static final String NEW_LINE_DELIMITER = "\n";
 	private static final int MAXIMUM_NUMBER_COUNT = 10;
 
 	public int add(String numbers) throws Exception {
 		int sum = 0;
+
+		// Checking if the input number string is empty
 		if (numbers.isEmpty()) {
 			return sum;
 		}
 
+		// Checking if the input number string contains invalid pattern like two
+		// adjacent delimiters
 		if (invalidPatternCheck(numbers)) {
 			System.out.println("Two adjacent delimiters found");
 			return 0;
 		}
 
+		// Code snippet to handle custom delimiters
 		String delimiter = DEFAULT_DELIMTER;
+		
+		// Checks if custom delimiter is there
 		if (numbers.startsWith("//")) {
-			String[] parts = numbers.split("\n", 2);
+			String[] parts = numbers.split(NEW_LINE_DELIMITER, 2);
 			if (parts[0].startsWith("//")) {
 				delimiter = parts[0].substring(2);
 				numbers = parts[1];
@@ -30,16 +38,14 @@ public class StringCalculator {
 			}
 		}
 
-		String[] numberArray = numbers.split("[" + delimiter + "\n]+");
+		String[] numberArray = numbers.split("[" + delimiter + NEW_LINE_DELIMITER + "]+");
 		if (numberArray != null && numberArray.length < MAXIMUM_NUMBER_COUNT) {
 
-//			for (String number : numberArray) {
-//				int num = Integer.parseInt(number);
-//				sum += num;
-//			}
 			List<Integer> negatives = new ArrayList<>();
 			for (String number : numberArray) {
 				int num = Integer.parseInt(number);
+				
+				// To handle negatives
 				if (num < 0) {
 					negatives.add(num);
 				} else if (num <= 1000) {
@@ -47,6 +53,7 @@ public class StringCalculator {
 				}
 			}
 
+			// If the input string contains negative values, then throw an exception
 			if (!negatives.isEmpty()) {
 				throw new Exception("Negative numbers not allowed: " + negatives.toString());
 			}
@@ -57,11 +64,18 @@ public class StringCalculator {
 		return sum;
 	}
 
+	/**
+	 * Method to check there is any invalid pattern in the number string
+	 * 
+	 * @param numbers
+	 * @return boolean
+	 */
 	public boolean invalidPatternCheck(String numbers) {
 		boolean flag = false;
 
 		for (char value : numbers.toCharArray()) {
-			if (String.valueOf(value).contentEquals("\n") || String.valueOf(value).contentEquals(DEFAULT_DELIMTER)) {
+			if (String.valueOf(value).contentEquals(NEW_LINE_DELIMITER)
+					|| String.valueOf(value).contentEquals(DEFAULT_DELIMTER)) {
 
 				if (flag) {
 					return true;
@@ -88,8 +102,8 @@ public class StringCalculator {
 			System.out.println(calculator.add("//;\n1;2")); // 3
 			System.out.println(calculator.add("1,1001")); // 1
 			System.out.println(calculator.add("//[***]\n1***2***3")); // 6
-            System.out.println(calculator.add("//[*][%]\n1*2%3")); // 6
-            System.out.println(calculator.add("//[***][%%%%]\n1***2%%%%3")); // 6
+			System.out.println(calculator.add("//[*][%]\n1*2%3")); // 6
+			System.out.println(calculator.add("//[***][%%%%]\n1***2%%%%3")); // 6
 
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
