@@ -37,5 +37,17 @@ class StringCalculatorTest {
 	        int result = calculator.add("1,2,3,4,5,6,7,8,9,10,11,12,13");
 	        Assertions.assertEquals(0, result);
 	    }
+	    
+	    @Test
+	    public void testNewLineAndComma() throws Exception {
+	        int result = calculator.add("1\n2,3");
+	        Assertions.assertEquals(6, result);
+	    }
+	    
+	    @Test
+	    public void testNewLineOnly() throws Exception {
+	        int result = calculator.add("1\n2\n3");
+	        Assertions.assertEquals(6, result);
+	    }
 
 }

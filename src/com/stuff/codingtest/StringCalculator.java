@@ -1,8 +1,5 @@
 package com.stuff.codingtest;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class StringCalculator {
 
 	private static final String DEFAULT_DELIMTER = ",";
@@ -14,14 +11,14 @@ public class StringCalculator {
 			return sum;
 		}
 
-		String[] numberArray = numbers.split(DEFAULT_DELIMTER);
+		String[] numberArray = numbers.split("[" + DEFAULT_DELIMTER + "\n]+");
 		if (numberArray != null && numberArray.length < MAXIMUM_NUMBER_COUNT) {
 
 			for (String number : numberArray) {
 				int num = Integer.parseInt(number);
 				sum += num;
 			}
-		}else {
+		} else {
 			System.out.println("Amount of numbers exceeded the maximum limit!!!");
 		}
 
@@ -35,6 +32,7 @@ public class StringCalculator {
 			System.out.println(calculator.add("")); // 0
 			System.out.println(calculator.add("1")); // 1
 			System.out.println(calculator.add("1,2")); // 3
+			System.out.println(calculator.add("1\n2,3")); // 6
 
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
