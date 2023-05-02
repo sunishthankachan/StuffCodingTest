@@ -68,5 +68,11 @@ class StringCalculatorTest {
 	            calculator.add("-1,2,-3");
 	        });
 	    }
+	    
+	    @Test
+	    public void testIgnoreNumbersGreaterThan1000() throws Exception {
+	        int result = calculator.add("2,1001,2000,3");
+	        Assertions.assertEquals(5, result);
+	    }
 
 }

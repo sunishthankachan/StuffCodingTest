@@ -86,6 +86,7 @@ public class StringCalculator {
 			System.out.println(calculator.add("1,2,3,4,5,6,7,8,9,10,11")); // Invalid input
 			System.out.println(calculator.add("1,2,\n,3")); // Invalid pattern
 			System.out.println(calculator.add("//;\n1;2")); // 3
+			System.out.println(calculator.add("1,1001")); // 1
 
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
