@@ -74,5 +74,23 @@ class StringCalculatorTest {
 	        int result = calculator.add("2,1001,2000,3");
 	        Assertions.assertEquals(5, result);
 	    }
+	    
+	    @Test
+	    public void testCustomDelimiterOfAnyLength() throws Exception {
+	        int result = calculator.add("//[***]\n1***2***3");
+	        Assertions.assertEquals(6, result);
+	    }
+
+	    @Test
+	    public void testMultipleDelimiters() throws Exception {
+	        int result = calculator.add("//[*][%]\n1*2%3");
+	        Assertions.assertEquals(6, result);
+	    }
+
+	    @Test
+	    public void testMultipleDelimitersOfAnyLength() throws Exception {
+	        int result = calculator.add("//[***][%%%%]\n1***2%%%%3");
+	        Assertions.assertEquals(6, result);
+	    }
 
 }
