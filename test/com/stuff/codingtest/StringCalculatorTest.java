@@ -49,5 +49,11 @@ class StringCalculatorTest {
 	        int result = calculator.add("1\n2\n3");
 	        Assertions.assertEquals(6, result);
 	    }
+	    
+	    @Test
+	    public void testInvalidPatternWithAdjacentDelimiters() throws Exception {
+	        int result = calculator.add("1,2,\n\n,3");
+	        Assertions.assertEquals(0, result);
+	    }
 
 }
